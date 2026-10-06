@@ -1,0 +1,141 @@
+Questão 1: Sistema de Cupons Avançado
+
+fun calcularDesconto(valor: Double, cupom: String?): Double {
+    return when (cupom) {
+        "PROMO10" -> valor - 10
+        "PROMO20" -> valor - 20
+        else -> valor // cobre nulo e qualquer outro código inválido
+    }
+}
+
+fun questao1() {
+    println("Questão 1 - Sistema de Cupons")
+    println("Com PROMO10: ${calcularDesconto(100.0, "PROMO10")}") // 90.0
+    println("Com PROMO20: ${calcularDesconto(100.0, "PROMO20")}") // 80.0
+    println("Com cupom inválido: ${calcularDesconto(100.0, "XYZ")}") // 100.0
+    println("Sem cupom (null): ${calcularDesconto(100.0, null)}") // 100.0
+}
+
+Questão 2: Auditoria de Entregas
+fun auditarEntregas(enderecos: List<String?>) {
+    for (endereco in enderecos) {
+        val enderecoFinal = endereco ?: "Endereço Desconhecido"
+
+        if (enderecoFinal == "Endereço Desconhecido") {
+            println("Entrega Pendente: Falta de dados")
+        } else {
+            println("Rota traçada para: $enderecoFinal")
+        }
+    }
+}
+
+fun questao2() {
+    println("Questão 2 - Auditoria de Entregas")
+    val listaEnderecos = listOf("Rua A, 123", null, "Av. Central, 456", null, "Rua B, 789")
+    auditarEntregas(listaEnderecos)
+}
+
+Questão 3: Validação de Perfil de Streaming
+
+fun validarBioInfantil(bio: String?) {
+    val tamanho = bio?.length ?: 0
+
+    if (tamanho <= 50) {
+        println("Bio aceita (tamanho: $tamanho)")
+    } else {
+        println("Bio muito longa (tamanho: $tamanho)")
+    }
+}
+
+fun questao3() {
+    println("Questão 3 - Validação de Perfil Infantil")
+    validarBioInfantil(null) // Bio aceita (tamanho: 0)
+    validarBioInfantil("Oi, eu amo desenhos animados!") // Bio aceita
+    validarBioInfantil("A".repeat(60)) // Bio muito longa
+}
+
+Questão 4: Processamento de Transações Pix
+
+fun processarTransacoesPix(transacoes: List<Double?>) {
+    var total = 0.0
+
+    for (transacao in transacoes) {
+        if (transacao != null) {
+            total += transacao
+        } else {
+            println("Transação ignorada")
+        }
+    }
+
+    println("Valor total processado: R$ $total")
+}
+
+fun questao4() {
+    println("Questão 4 - Processamento de Transações Pix")
+    val transacoes = listOf(50.0, null, 120.5, null, 10.0)
+    processarTransacoesPix(transacoes)
+}
+
+Questão 5: Classificação de Feedback de Motoristas
+
+fun avaliarMotorista(nota: Int?) {
+    val notaFinal = nota ?: 0
+
+    when (notaFinal) {
+        5 -> println("Excelente corrida!")
+        4 -> println("Boa corrida.")
+        1, 2, 3 -> println("Precisamos melhorar.")
+        0 -> println("Nenhuma avaliação fornecida.")
+        else -> println("Nota inválida.")
+    }
+}
+
+fun questao5() {
+    println("Questão 5 - Avaliação de Motoristas")
+    avaliarMotorista(5)
+    avaliarMotorista(4)
+    avaliarMotorista(2)
+    avaliarMotorista(null)
+}
+
+Questão 6: Função Lambda para Cálculo de Gorjeta
+
+val calcularGorjeta: (Double?) -> Double = {
+    if (it == null || it < 0) {
+        0.0
+    } else {
+        it
+    }
+}
+
+fun questao6() {
+    println("Questão 6 - Cálculo de Gorjeta (Lambda)")
+    println("Gorjeta nula: ${calcularGorjeta(null)}")       // 0.0
+    println("Gorjeta negativa: ${calcularGorjeta(-5.0)}")   // 0.0
+    println("Gorjeta válida: ${calcularGorjeta(15.0)}")     // 15.0
+}
+
+Questão 7: Limpeza de Banco de Dados de Usuários
+
+fun limparContasInvalidas(emails: List<String?>) {
+    var contasInvalidas = 0
+
+    for (email in emails) {
+        val tamanho = email?.length ?: 0
+
+        if (email == null || tamanho == 0) {
+            contasInvalidas++
+            println("Aviso: conta marcada para deleção (e-mail inválido)")
+        } else {
+            println("Conta válida: $email")
+        }
+    }
+
+    println("Total de contas a serem apagadas: $contasInvalidas")
+}
+
+fun questao7() {
+    println("Questão 7 - Limpeza de Banco de Dados")
+    val emails = listOf("ana@email.com", null, "", "joao@email.com", null, "   " /* cuidado: não é vazio, tem espaço */)
+    limparContasInvalidas(emails)
+}
